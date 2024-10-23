@@ -24,7 +24,7 @@
   margin-left: 10px;
   margin-top: 20px;
 }
-.title-el {
+.title-el, {
   text-align: center;
   color: white;
   font-size: 3rem;
@@ -200,4 +200,59 @@ textarea {
 
 .bottom-nav-link:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Settings */
+.settings-title{
+  text-align: center;
+
+}
+/* Logout */
+.logout-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1000;
+  text-align: center;
+}
+
+.logout-message {
+  margin-bottom: 20px;
+}
+
+.logout-actions {
+  margin-top: 20px;
+}
+
+.logout-confirm-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.logout-cancel-button {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
