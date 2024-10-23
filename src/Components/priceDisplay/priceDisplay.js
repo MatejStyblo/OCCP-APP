@@ -11,12 +11,8 @@ const PriceDisplay = ({
   buying,
   onStopClick,
   chargingData,
-  isPlugged
+  isPlugged,
 }) => {
-console.log(priceIwant < pricePerKWh);
-console.log(priceIwant);
-console.log(pricePerKWh);
-
   return (
     <div className="pricing-block">
       {loading ? (
@@ -26,7 +22,7 @@ console.log(pricePerKWh);
         </div>
       ) : (
         <>
-        <h3 className="actual-price">Aktuální Cena</h3>
+          <h3 className="actual-price">Aktuální Cena</h3>
           <h3 className="price">{pricePerKWh.toFixed(2)} Kč/KWh</h3>
           <label>
             <input
@@ -49,9 +45,7 @@ console.log(pricePerKWh);
               Nenakupovat
             </button>
           ) : (
-            <button className="stop-buying">
-              Není připojené auto
-            </button>
+            <button className="stop-buying">Není připojené auto</button>
           )}
         </>
       )}

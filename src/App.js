@@ -11,7 +11,8 @@ import {
 } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "./Components/navbar/Navbar";
-import ChargingCostSummary from "./ChargingCostSummary/ChargingCostSummary";
+import ChargingCostSummary from "./Components/ChargingCostSummary/ChargingCostSummary";
+import Settings from "./Components/Settings/Settings";
 import { Provider } from "react-redux"; // Redux Provider
 import store from "./redux/store";
 
@@ -37,6 +38,7 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={user ? <MainPage /> : <Login />} />
         <Route path="/summary" element={<ChargingCostSummary />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
       {user && <BottomNav />}
     </div>
