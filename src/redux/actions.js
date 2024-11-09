@@ -1,13 +1,14 @@
 // actions.js
-export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
-export const SET_ACTUAL_PRICE = 'SET_ACTUAL_PRICE';
-export const SET_NEXT_HOUR_PRICE = 'SET_NEXT_HOUR_PRICE';
-export const TOGGLE_CHARGING = 'TOGGLE_CHARGING';
-export const SET_CHARGING_RESULT = 'SET_CHARGING_RESULT';
-export const SET_TOTAL_COST = 'SET_TOTAL_COST';
-export const SET_FETCH_ERROR = 'SET_FETCH_ERROR';
-export const SET_ELECTRIC_DATA = 'SET_ELECTRIC_DATA'
-export const SET_INPUT_VALUE= 'SET_INPUT_VALUE'
+export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const SET_ACTUAL_PRICE = "SET_ACTUAL_PRICE";
+export const SET_NEXT_HOUR_PRICE = "SET_NEXT_HOUR_PRICE";
+export const TOGGLE_CHARGING = "TOGGLE_CHARGING";
+export const SET_CHARGING_RESULT = "SET_CHARGING_RESULT";
+export const SET_TOTAL_COST = "SET_TOTAL_COST";
+export const SET_FETCH_ERROR = "SET_FETCH_ERROR";
+export const SET_ELECTRIC_DATA = "SET_ELECTRIC_DATA";
+export const SET_INPUT_VALUE = "SET_INPUT_VALUE";
+export const SET_PRICE_I_WANT = "SET_PRICE_I_WANT";
 export const fetchDataSuccess = (data) => ({
   type: FETCH_DATA_SUCCESS,
   payload: data,
@@ -24,8 +25,8 @@ export const setNextHourPrice = (price) => ({
 });
 
 export const toggleCharging = (isCharging) => ({
-    type: TOGGLE_CHARGING,
-    payload: isCharging
+  type: TOGGLE_CHARGING,
+  payload: isCharging,
 });
 
 export const setChargingResult = (result) => ({
@@ -48,5 +49,9 @@ export const setEletricData = (data) => ({
 });
 export const setInputValue = (value) => ({
   type: SET_INPUT_VALUE,
+  payload: value,
+});
+export const setPriceIwant = (value) => ({
+  type: SET_PRICE_I_WANT,
   payload: value,
 });

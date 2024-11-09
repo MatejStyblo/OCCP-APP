@@ -1,7 +1,7 @@
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../AuthContext";
 import React, { useEffect, useState } from "react";
-import PriceDisplay from "../Components/priceDisplay/priceDisplay";
-import ChargingStatus from "../Components/chargingStatus/chargingStatus";
+import PriceDisplay from "../priceDisplay/priceDisplay";
+import ChargingStatus from "../chargingStatus/chargingStatus";
 import { IoLogoGoogle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,12 +9,12 @@ import {
   setEletricData,
   toggleCharging,
   setInputValue,
-} from "../redux/actions";
+  setPriceIwant,
+} from "../../redux/actions";
 const MainPage = () => {
   const { user } = useAuth();
   const dispatch = useDispatch();
   const [actualPrice, setActualPrice] = useState("");
-  const [priceIwant, setPriceIwant] = useState("");
   const [nextHourPrice, setNextHourPrice] = useState("");
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -22,9 +22,9 @@ const MainPage = () => {
   const [fetchError, setFetchError] = useState(null);
   const [chargingError, setChargingError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { chargingData, electricData, isCharging, inputValue } = useSelector(
-    (state) => state.charging
-  );
+  const { chargingData, electricData, isCharging, inputValue, priceIwant } =
+    useSelector((state) => state.charging);
+  console.log(priceIwant);
 
   useEffect(() => {
     const fetchChargingData = async () => {
@@ -64,11 +64,14 @@ const MainPage = () => {
     return "N/A";
   };
   const calculateCurrentCycleCost = () => {
+    console.log(chargingData.data.session?.energy_consumed);
+
     if (startTime && endTime) {
       const durationInHours = (endTime - startTime) / (1000 * 60 * 60);
       const currentCycleCost =
         durationInHours *
         pricePerKWh *
+        100 *
         parseFloat(chargingData.data.session?.energy_consumed);
 
       return currentCycleCost.toFixed(2);
@@ -153,7 +156,7 @@ const MainPage = () => {
 
   const buyOnClick = () => {
     dispatch(toggleCharging(true));
-    setPriceIwant(inputValue);
+    dispatch(setPriceIwant(inputValue));
     dispatch(setInputValue(inputValue));
     setStartTime(new Date());
     toggleChargingApi();
@@ -162,12 +165,12 @@ const MainPage = () => {
   const dontBuyOnClick = () => {
     dispatch(toggleCharging(false));
     dispatch(setInputValue(0));
-    setPriceIwant("");
+    dispatch(setPriceIwant(""));
     toggleChargingApi();
     setEndTime(new Date());
   };
   const handleInputChange = (value) => {
-    dispatch(setInputValue(value)); // Nastavení hodnoty do Reduxu
+    dispatch(setInputValue(value));
   };
 
   const actualPriceString = String(actualPrice).replace(",", ".");

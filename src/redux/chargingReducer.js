@@ -5,23 +5,22 @@ import {
   TOGGLE_CHARGING,
   SET_CHARGING_RESULT,
   SET_ELECTRIC_DATA,
-  SET_INPUT_VALUE
-} from './actions';
+  SET_INPUT_VALUE,
+  SET_PRICE_I_WANT,
+} from "./actions";
 
 const initialState = {
   chargingData: null,
   isLoading: false,
   error: null,
   isCharging: false,
-  priceIwant: '',
+  priceIwant: null,
   inputValue: null,
-  totalCost: 'N/A',
+  totalCost: "N/A",
   startTime: null,
   endTime: null,
   chargingResult: null,
   electricData: [],
-
-
 };
 
 const chargingReducer = (state = initialState, action) => {
@@ -45,12 +44,17 @@ const chargingReducer = (state = initialState, action) => {
     case SET_CHARGING_RESULT:
       return {
         ...state,
-        chargingResult: action.payload, 
+        chargingResult: action.payload,
       };
-      case SET_INPUT_VALUE:
+    case SET_INPUT_VALUE:
       return {
         ...state,
         inputValue: action.payload,
+      };
+    case SET_PRICE_I_WANT:
+      return {
+        ...state,
+        priceIwant: action.payload,
       };
     default:
       return state;

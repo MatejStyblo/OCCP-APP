@@ -13,7 +13,7 @@ import {
 const ElectricityConsumptionChart = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <h1>Spotřeba elektriky</h1>
+      <h1 className="chart-title">Spotřeba elektriky</h1>
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />

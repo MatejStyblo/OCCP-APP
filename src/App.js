@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import MainPage from "./renderMainPage/MainPage";
+import MainPage from "./Components/renderMainPage/MainPage";
 import Login from "./Components/Login/login";
 import { AuthProvider, useAuth } from "./AuthContext";
 import {

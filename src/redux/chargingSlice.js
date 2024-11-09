@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
@@ -8,11 +8,11 @@ const initialState = {
   chargingResult: null,
   totalCost: "N/A",
   fetchError: null,
-  electricData:null
+  electricData: null,
 };
 
 const chargingSlice = createSlice({
-  name: 'charging',
+  name: "charging",
   initialState,
   reducers: {
     fetchDataSuccess: (state, action) => {
@@ -39,6 +39,9 @@ const chargingSlice = createSlice({
     setElectricData: (state, action) => {
       state.electricData = action.payload;
     },
+    setPriceIWantData: (state, action) => {
+      state.electricData = action.payload;
+    },
   },
 });
 
@@ -51,7 +54,7 @@ export const {
   setChargingResult,
   setTotalCost,
   setFetchError,
-  setElectricData
+  setElectricData,
 } = chargingSlice.actions;
 
 // Exporting the reducer
