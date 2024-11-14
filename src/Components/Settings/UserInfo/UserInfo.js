@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const UserInfo = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  console.log(user);
-  
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-      const token = localStorage.getItem("authToken");
-        const response = await fetch("http://localhost:5000/api/user", {
-          method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const token = localStorage.getItem("authToken");
+        const response = await fetch(
+          `${process.env.REACT_APP_URL_TO_SERVER}/settings/user`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(response);
+
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
 
         const userData = await response.json();
+        console.log(userData);
+
         setUser(userData);
       } catch (err) {
         setError(err.message);

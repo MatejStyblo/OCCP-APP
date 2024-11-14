@@ -1,10 +1,11 @@
-name: Deploy to Netlify
+name: Deploy to Railway
 
 on:
   push:
     branches:
       - main
       - master
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,23 +19,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "20"
+          node-version: "20" # Použij verzi Node.js podle potřeby
 
       # Instalace závislostí
       - name: Install dependencies
         run: npm install
 
-      # Build aplikace
-      - name: Build application
-        run: npm run build
+      # Instalace Railway CLI
+      - name: Install Railway CLI
+        run: npm install -g railway
 
-      # Instalace Netlify CLI
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
-
-      # Deploy na Netlify
-      - name: Deploy to Netlify
+      # Přihlášení do Railway pomocí API tokenu
+      - name: Railway login
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: netlify deploy --prod --dir=build
+          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }} # Ujisti se, že máš API token v secrets
+        run: railway login --api-key $RAILWAY_API_TOKEN
+
+      # Nasazení aplikace na Railway
+      - name: Deploy to Railway
+        run: railway up --env production

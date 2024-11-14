@@ -10,7 +10,7 @@ const ChargingCostSummary = () => {
       try {
         const token = localStorage.getItem("authToken");
         const response = await fetch(
-          "http://localhost:5000/api/charging/logs",
+          `${process.env.REACT_APP_URL_TO_SERVER}/api/charging/logs`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

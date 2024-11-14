@@ -11,17 +11,21 @@ const Login = () => {
 
   const { login } = useAuth(); // Získejte funkci login
   const navigate = useNavigate();
+  console.log(process.env.REACT_APP_URL_TO_SERVER);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL_TO_SERVER}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
@@ -29,12 +33,14 @@ const Login = () => {
 
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", userId); // Uložení userId do localStorage
-      
+
       login(data);
       navigate("/"); // Přesměrování na domovskou stránku
     } else {
       const errorData = await response.json();
-      setErrorMessage(errorData.message || "Špatné uživatelské jméno nebo heslo.");
+      setErrorMessage(
+        errorData.message || "Špatné uživatelské jméno nebo heslo."
+      );
     }
   };
 

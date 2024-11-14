@@ -31,7 +31,7 @@ const MainPage = () => {
       try {
         const token = localStorage.getItem("authToken");
         const response = await fetch(
-          "http://localhost:5000/api/charging/data",
+          `${process.env.REACT_APP_URL_TO_SERVER}/charging/data`,
           {
             method: "GET",
             headers: {
@@ -84,7 +84,9 @@ const MainPage = () => {
       setIsLoading(true);
       setFetchError(null);
       try {
-        const response = await fetch("http://localhost:5000/api/scrape");
+        const response = await fetch(
+          `${process.env.REACT_APP_URL_TO_SERVER}/api/scrape`
+        );
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -136,14 +138,18 @@ const MainPage = () => {
       chargingData?.data.status === "Charging" ? "notCharging" : "Charging";
     const cost = calculateCurrentCycleCost();
 
-    const response = await fetch("http://localhost:5000/api/charging/data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-      body: JSON.stringify({ status: newStatus, cost }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL_TO_SERVER}/charging/data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify({ status: newStatus, cost }),
+      }
+    );
+    console.log(response);
 
     if (response.ok) {
       const result = await response.json();
